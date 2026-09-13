@@ -19,5 +19,16 @@ export function useAppointments() {
     saveAppointments(next);
   }
 
-  return { appointments, addAppointment, removeAppointment };
+  /** Añade las citas del archivo importado que no existan ya (por id), sin borrar las actuales. */
+  function importAppointments(imported: Appointment[]): number {
+    const existingIds = new Set(appointments.map((a) => a.id));
+    const newOnes = imported.filter((a) => !existingIds.has(a.id));
+    if (newOnes.length === 0) return 0;
+    const next = [...appointments, ...newOnes];
+    setAppointments(next);
+    saveAppointments(next);
+    return newOnes.length;
+  }
+
+  return { appointments, addAppointment, removeAppointment, importAppointments };
 }

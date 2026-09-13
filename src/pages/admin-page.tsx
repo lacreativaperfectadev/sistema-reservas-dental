@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { DailyAgenda } from "../components/admin/daily-agenda";
+import { AppointmentsBackup } from "../components/admin/appointments-backup";
 import { BlockHoursPanel } from "../components/admin/block-hours-panel";
 import { ServicesManager } from "../components/admin/services-manager";
 import { ScheduleManager } from "../components/admin/schedule-manager";
@@ -28,7 +29,8 @@ export function AdminPage() {
 
   const { services, updateServices } = useServices();
   const { schedule, updateSchedule } = useSchedule();
-  const { appointments, removeAppointment } = useAppointments();
+  const { appointments, removeAppointment, importAppointments } =
+    useAppointments();
   const { clinicInfo, updateClinicInfo } = useClinicInfo();
   const { legalContent, updateLegalContent } = useLegalContent();
 
@@ -78,6 +80,10 @@ export function AdminPage() {
               onRemove={removeAppointment}
             />
             <BlockHoursPanel schedule={schedule} onUpdate={updateSchedule} />
+            <AppointmentsBackup
+              appointments={appointments}
+              onImport={importAppointments}
+            />
           </>
         )}
         {tab === "horario" && (
