@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", system-ui, "Segoe UI", Roboto, sans-serif;
+
+  --color-clinic-50: #eef7f6;
+  --color-clinic-100: #d3ece9;
+  --color-clinic-200: #a7d9d3;
+  --color-clinic-300: #74c1b8;
+  --color-clinic-400: #46a89c;
+  --color-clinic-500: #2d8b81;
+  --color-clinic-600: #226f68;
+  --color-clinic-700: #1c5854;
+  --color-clinic-800: #194643;
+  --color-clinic-900: #163b39;
+
+  --color-sand-50: #fdfbf7;
+  --color-sand-100: #f8f2e9;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-sand-50);
+  color: var(--color-clinic-900);
+  -webkit-font-smoothing: antialiased;
+}
