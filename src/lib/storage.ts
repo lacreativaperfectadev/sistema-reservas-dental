@@ -46,11 +46,74 @@ const DEFAULT_SCHEDULE: Schedule = {
 };
 
 const DEFAULT_CLINIC_INFO: ClinicInfo = {
-  name: "[Nombre de la clínica]",
-  address: "[Dirección del consultorio]",
-  phone: "[Teléfono / WhatsApp]",
-  email: "[Correo de contacto]",
+  name: "Clínica Dental Sonrisa",
+  address: "Calle Mayor 24, Madrid",
+  phone: "912 345 678",
+  email: "info@clinicasonrisa.es",
   hoursText: "Lunes a viernes, 9:00-14:00 y 16:00-20:00",
+  heroHeadline: "Tu sonrisa,",
+  heroAccentText: "nuestra prioridad",
+  heroSubtext:
+    "Cuido tu salud bucal con tecnología moderna, atención cercana y planes de tratamiento pensados para ti. Agenda tu cita en segundos, sin llamadas ni esperas.",
+  heroImageUrl: "/images/hero-banner.webp",
+  dentistName: "Dra. Laura Martínez",
+  treatmentsEyebrow: "Nuestros tratamientos",
+  treatmentsHeading: "Salud, estética y bienestar",
+  treatmentsHeadingAccent: "en un mismo lugar",
+  treatmentsDescription:
+    "Cada tratamiento está pensado para cuidar tu salud bucal y devolverte la confianza de sonreír, con un plan personalizado en cada visita.",
+  finalCtaEyebrow: "Tu sonrisa empieza aquí",
+  finalCtaHeading: "Reserva tu cita y da",
+  finalCtaHeadingAccent: "el primer paso",
+  finalCtaDescription:
+    "Agenda en pocos segundos y empieza a cuidar tu sonrisa con un plan de tratamiento pensado para ti.",
+  finalCtaButtonText: "Reservar cita ahora",
+  finalCtaImageUrl: "/images/cta-sonrisas.webp",
+  servicesHeading: "Nuestros servicios",
+  servicesSubtext: "Todos nuestros tratamientos con un profesional certificado",
+  differentiators: [
+    {
+      icon: "diamond",
+      title: "Tecnología avanzada",
+      description:
+        "Equipo de última generación para diagnósticos más precisos.",
+    },
+    {
+      icon: "people",
+      title: "Trato cercano",
+      description: "Te escucho y te acompaño en todo el proceso.",
+    },
+    {
+      icon: "shield",
+      title: "Entorno seguro",
+      description: "Máxima higiene y protocolos de esterilización.",
+    },
+    {
+      icon: "heart",
+      title: "Resultados reales",
+      description: "Sonrisas más sanas y pacientes más felices.",
+    },
+  ],
+  treatments: [
+    {
+      title: "Limpieza y Prevención",
+      description:
+        "Elimino placa y sarro para mantener tus encías sanas y prevenir enfermedades bucales a largo plazo.",
+      imageUrl: "/images/limpieza.webp",
+    },
+    {
+      title: "Blanqueamiento Dental",
+      description:
+        "Recupera el brillo natural de tu sonrisa con tratamientos seguros y resultados visibles desde la primera sesión.",
+      imageUrl: "/images/blanqueamiento.webp",
+    },
+    {
+      title: "Ortodoncia",
+      description:
+        "Alineo tus dientes con brackets o alineadores invisibles, adaptados a tu estilo de vida y objetivos.",
+      imageUrl: "/images/ortodoncia.webp",
+    },
+  ],
 };
 
 function readJson<T>(key: string, fallback: T): T {

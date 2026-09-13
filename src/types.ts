@@ -40,6 +40,28 @@ export interface Appointment {
   createdAt: string;
 }
 
+export type DifferentiatorIconKey =
+  | "clinic"
+  | "graduation"
+  | "heart"
+  | "card"
+  | "gift"
+  | "diamond"
+  | "people"
+  | "shield";
+
+export interface Differentiator {
+  icon: DifferentiatorIconKey;
+  title: string;
+  description: string;
+}
+
+export interface Treatment {
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
 export interface ClinicInfo {
   name: string;
   address: string;
@@ -47,6 +69,25 @@ export interface ClinicInfo {
   email: string;
   hoursText: string;
   logo?: string | null; // base64 data URL
+  heroHeadline?: string;
+  heroAccentText?: string;
+  heroSubtext?: string;
+  heroImageUrl?: string;
+  dentistName?: string;
+  differentiators?: Differentiator[];
+  treatments?: Treatment[];
+  treatmentsEyebrow?: string;
+  treatmentsHeading?: string;
+  treatmentsHeadingAccent?: string;
+  treatmentsDescription?: string;
+  finalCtaEyebrow?: string;
+  finalCtaHeading?: string;
+  finalCtaHeadingAccent?: string;
+  finalCtaDescription?: string;
+  finalCtaButtonText?: string;
+  finalCtaImageUrl?: string;
+  servicesHeading?: string;
+  servicesSubtext?: string;
 }
 
 export interface LegalContent {

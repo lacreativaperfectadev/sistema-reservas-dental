@@ -6,7 +6,8 @@ interface LocationHoursProps {
 }
 
 export function LocationHours({ clinicInfo }: LocationHoursProps) {
-  const mapsUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyDNr0YG2_lk_20yzb9_BzzZPYJQCVvLGUg&q=${encodeURIComponent(clinicInfo.address || "consultorio dental")}`;
+  const address = clinicInfo.address || "consultorio dental";
+  const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 
   return (
     <section id="contacto" className="bg-clinic-50 py-16">
@@ -85,24 +86,34 @@ export function LocationHours({ clinicInfo }: LocationHoursProps) {
             </div>
           </motion.div>
 
-          {/* Google Maps */}
+          {/* Cómo llegar */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="lg:col-span-2 rounded-2xl shadow-sm overflow-hidden h-80"
+            className="lg:col-span-2 flex flex-col items-center justify-center gap-4 rounded-2xl bg-white p-10 text-center shadow-sm"
           >
-            <iframe
-              src={mapsUrl}
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Ubicación del consultorio"
-            />
+            <span
+              aria-hidden="true"
+              className="flex h-14 w-14 items-center justify-center rounded-full bg-clinic-50 text-2xl"
+            >
+              📍
+            </span>
+            <div>
+              <h3 className="text-lg font-semibold text-clinic-800">
+                ¿Cómo llegar?
+              </h3>
+              <p className="mt-1 text-sm text-clinic-600">{clinicInfo.address}</p>
+            </div>
+            <a
+              href={mapsSearchUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block rounded-full bg-clinic-800 px-6 py-2.5 text-sm font-semibold text-sand-50 shadow-md transition hover:-translate-y-0.5 hover:bg-clinic-700"
+            >
+              Cómo llegar
+            </a>
           </motion.div>
         </div>
       </div>

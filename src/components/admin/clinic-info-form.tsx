@@ -1,14 +1,40 @@
 import { useState, type FormEvent } from "react";
-import type { ClinicInfo } from "../../types";
+import type { ClinicInfo, Differentiator, Treatment } from "../../types";
 import { LogoUploader } from "./logo-uploader";
+import { DifferentiatorsEditor } from "./differentiators-editor";
+import { TreatmentsEditor } from "./treatments-editor";
+import { HeroSectionEditor } from "./hero-section-editor";
+import { LandingSectionsEditor } from "./landing-sections-editor";
 
 interface ClinicInfoFormProps {
   clinicInfo: ClinicInfo;
   onUpdate: (info: ClinicInfo) => void;
 }
 
+const EMPTY_DIFFERENTIATOR: Differentiator = {
+  icon: "clinic",
+  title: "",
+  description: "",
+};
+
+const EMPTY_TREATMENT: Treatment = {
+  title: "",
+  description: "",
+  imageUrl: "",
+};
+
 export function ClinicInfoForm({ clinicInfo, onUpdate }: ClinicInfoFormProps) {
-  const [form, setForm] = useState(clinicInfo);
+  const [form, setForm] = useState<ClinicInfo>({
+    ...clinicInfo,
+    differentiators:
+      clinicInfo.differentiators && clinicInfo.differentiators.length > 0
+        ? clinicInfo.differentiators
+        : [EMPTY_DIFFERENTIATOR],
+    treatments:
+      clinicInfo.treatments && clinicInfo.treatments.length > 0
+        ? clinicInfo.treatments
+        : [EMPTY_TREATMENT],
+  });
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -39,6 +65,7 @@ export function ClinicInfoForm({ clinicInfo, onUpdate }: ClinicInfoFormProps) {
             ["phone", "Teléfono"],
             ["email", "Correo"],
             ["hoursText", "Horario (texto libre)"],
+            ["dentistName", "Nombre del dentista"],
           ] as const
         ).map(([field, label]) => (
           <div key={field}>
@@ -46,7 +73,7 @@ export function ClinicInfoForm({ clinicInfo, onUpdate }: ClinicInfoFormProps) {
               {label}
             </label>
             <input
-              value={form[field]}
+              value={form[field] || ""}
               onChange={(e) =>
                 setForm((f) => ({ ...f, [field]: e.target.value }))
               }
@@ -54,6 +81,28 @@ export function ClinicInfoForm({ clinicInfo, onUpdate }: ClinicInfoFormProps) {
             />
           </div>
         ))}
+
+        <HeroSectionEditor
+          form={form}
+          onChange={(patch) => setForm((f) => ({ ...f, ...patch }))}
+        />
+
+        <DifferentiatorsEditor
+          differentiators={form.differentiators || [EMPTY_DIFFERENTIATOR]}
+          onChange={(differentiators) =>
+            setForm((f) => ({ ...f, differentiators }))
+          }
+        />
+
+        <TreatmentsEditor
+          treatments={form.treatments || [EMPTY_TREATMENT]}
+          onChange={(treatments) => setForm((f) => ({ ...f, treatments }))}
+        />
+
+        <LandingSectionsEditor
+          form={form}
+          onChange={(patch) => setForm((f) => ({ ...f, ...patch }))}
+        />
       </div>
       <button
         type="submit"

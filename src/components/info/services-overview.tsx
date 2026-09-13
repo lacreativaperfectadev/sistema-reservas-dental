@@ -1,37 +1,23 @@
 import { motion } from "framer-motion";
-import type { Service } from "../../types";
+import type { ClinicInfo, Service } from "../../types";
+import { getServiceIcon } from "./service-icons";
 
 interface ServicesOverviewProps {
   services: Service[];
+  clinicInfo: ClinicInfo;
 }
 
-const ICON_MAP: Record<string, string> = {
-  limpieza: "🦷",
-  blanqueamiento: "✨",
-  ortodoncia: "→",
-  implante: "🔧",
-  endodoncia: "⚡",
-  resina: "💎",
-  extracción: "🦴",
-  revisión: "👀",
-  consulta: "💬",
-  default: "🪥",
-};
+export function ServicesOverview({
+  services,
+  clinicInfo,
+}: ServicesOverviewProps) {
+  const heading = clinicInfo.servicesHeading || "Nuestros servicios";
 
-function getIcon(serviceName: string): string {
-  const name = serviceName.toLowerCase();
-  for (const [key, icon] of Object.entries(ICON_MAP)) {
-    if (name.includes(key)) return icon;
-  }
-  return ICON_MAP.default;
-}
-
-export function ServicesOverview({ services }: ServicesOverviewProps) {
   if (!services.length) {
     return (
       <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         <h2 className="text-center text-2xl font-semibold text-clinic-800">
-          Nuestros servicios
+          {heading}
         </h2>
         <p className="mt-4 text-center text-clinic-500">
           Configura los servicios en el panel administrativo
@@ -49,15 +35,18 @@ export function ServicesOverview({ services }: ServicesOverviewProps) {
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-center text-2xl font-semibold text-clinic-800">
-          Nuestros servicios
+          {heading}
         </h2>
         <p className="mt-2 text-center text-clinic-600">
-          Todos nuestros tratamientos con profesionales certificados
+          {clinicInfo.servicesSubtext ||
+            "Todos nuestros tratamientos con un profesional certificado"}
         </p>
       </motion.div>
 
       <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {services.map((service, index) => (
+        {services.map((service, index) => {
+          const ServiceIcon = getServiceIcon(service.name);
+          return (
           <motion.div
             key={service.id}
             initial={{ opacity: 0, y: 12 }}
@@ -67,7 +56,7 @@ export function ServicesOverview({ services }: ServicesOverviewProps) {
             className="group rounded-2xl border border-clinic-100 bg-gradient-to-br from-white to-clinic-50 p-6 shadow-sm transition hover:shadow-md hover:border-clinic-200"
           >
             <div className="flex items-start justify-between">
-              <div className="text-4xl">{getIcon(service.name)}</div>
+              <ServiceIcon className="h-16 w-16" />
               <span className="text-xs font-semibold uppercase tracking-wide text-clinic-400 group-hover:text-clinic-600 transition">
                 {service.durationMinutes} min
               </span>
@@ -81,7 +70,8 @@ export function ServicesOverview({ services }: ServicesOverviewProps) {
               </p>
             )}
           </motion.div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

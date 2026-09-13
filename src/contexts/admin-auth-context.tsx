@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { sha256, generateToken, saveSession, getSession, clearSession } from "../utils/auth-utils";
 
-const ADMIN_PASSWORD_HASH = "8d969eef6ecad3c29a3a873fba1fda4b1f67e9c67a02e2f72e94b91d87f77f9e"; // sha256("admin")
+const ADMIN_PASSWORD_HASH = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"; // sha256("admin")
 
 interface AdminAuthContextType {
   isAuthenticated: boolean;
